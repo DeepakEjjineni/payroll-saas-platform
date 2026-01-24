@@ -3,6 +3,12 @@
 ## Week 1 – Product & Tech Foundation
 
 
+## About Payroll SaaS Platform
+This project aims to build a cloud-based payroll management platform where companies
+can manage employees, salaries, attendance, and payroll workflows.
+It is built as a SaaS application to be used by multiple customers via a web interface.
+
+
 ### Objective
 Establish a strong foundational understanding of the payroll SaaS domain and set up the core technical environment required for full-stack development.
 
