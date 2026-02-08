@@ -1,14 +1,7 @@
-import './App.css'
+import EmployeeManagement from "./pages/EmployeeManagement";
 
 function App() {
-
-  return (
-    <>
-      <header>
-        <h1>Payroll SaaS Platform</h1>
-      </header>
-    </>
-  )
+  return <EmployeeManagement />;
 }
 
-export default App
+export default App;
