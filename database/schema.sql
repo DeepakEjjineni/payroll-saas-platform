@@ -17,3 +17,21 @@ CREATE TABLE employees (
     department VARCHAR(100),
     salary DECIMAL(10,2)
 );
+
+CREATE TABLE payroll (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  employee_id INT NOT NULL,
+  month VARCHAR(20) NOT NULL,
+  gross_salary DECIMAL(10,2) NOT NULL,
+  deductions DECIMAL(10,2) NOT NULL,
+  net_salary DECIMAL(10,2) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY unique_employee_month (employee_id, month),
+  FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE CASCADE
+);
+
+
+CREATE INDEX idx_emp_id ON employees(id);
+CREATE INDEX idx_emp_salary ON employees(salary);
+CREATE INDEX idx_payroll_emp ON payroll(employee_id);
+

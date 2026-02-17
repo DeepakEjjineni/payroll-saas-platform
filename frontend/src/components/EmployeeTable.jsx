@@ -1,4 +1,4 @@
-function EmployeeTable({ employees, onEdit, onDelete }) {
+function EmployeeTable({ employees, payrollData, onEdit, onDelete, onCalculate }) {
   return (
     <div>
       <h2>Employee List</h2>
@@ -30,6 +30,10 @@ function EmployeeTable({ employees, onEdit, onDelete }) {
                 <td>{emp.salary}</td>
                 <td>
                   <button onClick={() => onEdit(emp)}>Edit</button>
+                  <button onClick={() => onCalculate(emp.id)}>
+                    Calculate Salary
+                  </button>
+
                   <button
                     onClick={() => {
                       if (window.confirm("Delete this employee?")) {
@@ -45,6 +49,15 @@ function EmployeeTable({ employees, onEdit, onDelete }) {
           )}
         </tbody>
       </table>
+      {payrollData && (
+        <div style={{ marginTop: "20px", border: "1px solid #ccc", padding: "10px" }}>
+          <h3>Salary Breakdown</h3>
+          <p><strong>Gross Salary:</strong> ₹{payrollData.gross_salary}</p>
+          <p><strong>Deductions:</strong> ₹{payrollData.deductions}</p>
+          <p><strong>Net Salary:</strong> ₹{payrollData.net_salary}</p>
+        </div>
+      )}
+
     </div>
   );
 }

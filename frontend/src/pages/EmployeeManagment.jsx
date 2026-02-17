@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import EmployeeForm from "../components/EmployeeForm";
 import EmployeeTable from "../components/EmployeeTable";
+import { calculatePayroll, getPayrollByEmployee } from "../services/payrollService";
+
 import {
   getEmployees,
   addEmployee,
@@ -11,6 +13,7 @@ import {
 function EmployeeManagement() {
   const [employees, setEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [payrollData, setPayrollData] = useState(null);
   
   const fetchEmployees = async () => {
     try {
@@ -68,6 +71,20 @@ function EmployeeManagement() {
     setSelectedEmployee(employee);
   };
 
+  const handleCalculate = async (employeeId) => {
+  try {
+    await calculatePayroll({
+      employee_id: employeeId,
+      month: "September",
+    });
+
+    const res = await getPayrollByEmployee(employeeId);
+    setPayrollData(res.data[0]);
+  } catch (error) {
+    alert(error.response?.data?.message || "Payroll calculation failed");
+  }
+};
+
   return (
     <div>
       <EmployeeForm
@@ -78,8 +95,10 @@ function EmployeeManagement() {
       <hr />
       <EmployeeTable
         employees={employees}
+        payrollData={payrollData}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onCalculate={handleCalculate}
       />
     </div>
   );
